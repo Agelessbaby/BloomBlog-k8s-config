@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bloomblog-feed-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: feed
+  template:
+    metadata:
+      labels:
+        app: feed
+    spec:
+      containers:
+        - name: bloomblog-feed
+          image: registry.digitalocean.com/bloomblog/bloomblog-feed:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8083
+          resources:
+            requests:
+              cpu: "10m"

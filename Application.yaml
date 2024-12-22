@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bloomblog
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Agelessbaby/BloomBlog-k8s-config
+    targetRevision: main
+    path: .
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default # 默认命名空间，仅适用于未指定 namespace 的资源
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

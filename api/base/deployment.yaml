@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bloomblog-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: bloomblog-api
+          image: registry.digitalocean.com/bloomblog/bloomblog-api:latest  # 改成你的镜像名称
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8088  # 容器内部服务监听的端口
+          resources:
+            requests:
+              cpu: "10m"
